@@ -13,8 +13,9 @@ class OwnerCommands(commands.Cog):
         guild = discord.Object(id=1390429149512077383)  # your server ID
         synced_test = await ctx.bot.tree.sync(guild=guild)
 
-        print(f"Synced {len(synced_gl)} commands globally ({synced_test} totally).")
-        await ctx.send(f"Synced {len(synced_gl)} commands globally ({synced_test} totally)")
+        print(f"Synced {len(synced_gl)} commands globally ({len(synced_test)} totally).")
+        await ctx.send(f"Synced {len(synced_gl)} commands globally ({len(synced_test)} totally)")
+
 
 async def setup(bot):
     await bot.add_cog(OwnerCommands(bot))
