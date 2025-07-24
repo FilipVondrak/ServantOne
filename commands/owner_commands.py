@@ -21,7 +21,7 @@ class OwnerCommands(commands.Cog):
     @commands.command(name="script")
     @commands.is_owner()
     async def script(self, ctx: commands.Context, script: str, *args: str) -> None:
-        script_path = f"./scripts/{script}"
+        script_path = f"./scripts/{script}.sh"
 
         # tries to run the script selected by user
         # the output is printed to console and also sent back to user
@@ -31,6 +31,10 @@ class OwnerCommands(commands.Cog):
             await ctx.reply(result.stdout)
         except FileNotFoundError:
             await ctx.reply("Script not found / invalid script")
+        except FileExistsError:
+            await ctx.reply("Script not executable!")
+        except PermissionError:
+            await ctx.reply("You don't have permission execute this script.")
         except Exception as e:
             print("Unexpected error:", e)
             await ctx.reply("That didnt work :(")
